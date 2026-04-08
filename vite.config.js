@@ -11,6 +11,8 @@ export default defineConfig({
         secure: true,
         rewrite: (path) => path.replace(/^\/proxy-api/, ""),
       },
+      host: "0.0.0.0",
+      allowedHosts: "all",
     },
   },
 });
