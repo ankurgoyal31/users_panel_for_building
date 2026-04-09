@@ -126,8 +126,8 @@ export default function Footer() {
       <div className="border-t border-black/8">
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between gap-3 text-xs text-gray-500">
           <p>
-            © 2025 Unique Builders. Powered by{" "}
-            <span className="text-gray-800">Bizsquared</span>
+            © 2025 Unique Builders. Created and managed by{" "}
+            <a href="https://bizsquared.com/" className="text-gray-800">Bizsquared</a>
           </p>
 
           <div className="flex flex-wrap gap-6">

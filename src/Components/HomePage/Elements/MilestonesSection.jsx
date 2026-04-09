@@ -93,7 +93,7 @@ export default function MilestonesSection() {
 
         return nextYear;
       });
-    }, 5000);
+    }, 6000);
 
     return () => clearInterval(interval);
   }, []);
@@ -136,7 +136,7 @@ export default function MilestonesSection() {
                 <img
                   src={milestones[year].img}
                   alt={milestones[year].title}
-                  className="w-full max-w-[500px] h-[420px] md:h-[580px] object-cover shadow-lg"
+                  className="w-full max-w-[500px] h-[420px] md:h-[580px] object-cover"
                 />
               </div>
             </div>
