@@ -47,7 +47,7 @@ const HomeHero = () => {
       </video>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40" />
+      {/* <div className="absolute inset-0 bg-black/40" /> */}
 
       {/* Center Content */}
       <div className="relative z-20 flex items-center justify-center h-full px-6">
