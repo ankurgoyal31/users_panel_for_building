@@ -58,7 +58,7 @@ export default function CommunitiesSection() {
     >
       <div className="container px-6 mx-auto text-center lg:px-10">
         
-        <h2 className="mb-12 text-3xl font-light tracking-wide uppercase md:text-4xl relative inline-block">
+        <h2 className="mb-12 text-[36px] font-light tracking-wide uppercase md:text-4xl relative inline-block">
           Our Values
           <span className="absolute left-1/2 -bottom-2 w-10 h-[2px] bg-[#0095e6] -translate-x-1/2 opacity-70"></span>
         </h2>
@@ -82,7 +82,7 @@ export default function CommunitiesSection() {
         {/* Title */}
         <div className="absolute text-left text-white top-5 left-5 right-5 z-10">
           <h3
-            className="text-lg font-medium leading-snug"
+            className="text-[18px] font-medium leading-snug"
             style={{ letterSpacing: "0.5px" }}
           >
             {community.name}
@@ -91,8 +91,8 @@ export default function CommunitiesSection() {
 
         {/* Description */}
         <div
-          className="absolute px-5 text-sm font-light text-white bottom-5 left-0 right-0 text-start z-10 leading-6"
-          style={{ letterSpacing: "0.5px" }}
+          className="absolute px-5 text-[14px] font-light text-white bottom-5 left-0 right-0 text-start z-10 leading-6"
+          style={{ letterSpacing: "0.2px" }}
         >
           {community.desc}
         </div>

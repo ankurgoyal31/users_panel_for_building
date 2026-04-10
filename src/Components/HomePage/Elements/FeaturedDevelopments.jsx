@@ -32,10 +32,10 @@ export default function FeaturedDevelopments() {
   return (
     <section className="py-20 bg-white">
       <div className="text-center mb-10 px-6">
-        <h2 className="text-3xl md:text-4xl font-light tracking-wider uppercase">
+        <h2 className="text-[36px] md:text-[36px] font-light tracking-wider uppercase">
           Our Featured Developments
         </h2>
-        <p className="text-gray-600 mt-3 max-w-2xl mx-auto pb-10">
+        <p className="text-gray-600 mt-3 max-w-xl mx-auto pb-10 text-base leading-tight">
           Explore uniquely crafted residential spaces with immaculate design,
           vast landscaping, and a premium lifestyle.
         </p>
@@ -45,7 +45,7 @@ export default function FeaturedDevelopments() {
         {tabKeys.map((tab) => (
           <button
             key={tab}
-            className="uppercase tracking-wide text-md relative pb-2"
+            className="uppercase tracking-wide text-[16px] relative pb-2"
             onClick={() => setActiveTab(tab)}
           >
             <span
@@ -78,7 +78,7 @@ export default function FeaturedDevelopments() {
         </div>
 
         <div className="w-full lg:w-[30%]">
-          <h3 className="text-xl font-light mb-3">{tabs[activeTab].title}</h3>
+          <h3 className="text-[32px] font-light mb-3">{tabs[activeTab].title}</h3>
 
           <p className="text-gray-600 leading-relaxed mb-6">
             {tabs[activeTab].desc}
@@ -86,7 +86,7 @@ export default function FeaturedDevelopments() {
 
           <Link
             to={`/projects/${tabs[activeTab].slug}`}
-            className="inline-block bg-black text-white px-6 py-3 text-sm tracking-wide uppercase hover:bg-gray-800 transition"
+            className="inline-block bg-black text-white px-6 py-3 text-[16px] tracking-wide uppercase hover:bg-gray-800 transition"
           >
             Know More
           </Link>

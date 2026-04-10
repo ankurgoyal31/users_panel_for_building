@@ -24,8 +24,8 @@ export default function LifestyleSection() {
       <div className="grid grid-cols-1 md:grid-cols-10 container-fluid mx-auto">
         {/* Left Text (50%) */}
         <div className="md:col-span-5 pr-70 ps-30 flex flex-col justify-center p-10">
-          <h2 className="text-4xl">Beyond the Horizon of Construction</h2>
-          <p className="mt-6 mb-10 text-gray-700 text-md">
+          <h2 className="text-[32px]">Beyond the Horizon of Construction</h2>
+         <p className="mt-6 mb-10 text-gray-700 text-[16px] leading-tight">
             Many build for the present; we build for the heritage. Our
             "Human-Centric Design" philosophy ensures that every corridor, every
             window placement, and every amenity is an answer to a lifestyle

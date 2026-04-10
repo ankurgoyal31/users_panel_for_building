@@ -101,7 +101,7 @@ export default function MilestonesSection() {
   return (
     <section className="relative w-full py-16 overflow-hidden bg-white">
       <div className="relative z-10 px-6 mx-auto lg:px-20">
-        <h2 className="mb-12 text-3xl font-light tracking-wide md:text-4xl">
+        <h2 className="mb-12 text-[36px] font-light tracking-wide md:text-4xl">
           OUR MILESTONES
         </h2>
 
@@ -121,13 +121,13 @@ export default function MilestonesSection() {
               </span>
 
               <div className="relative z-20 md:w-[48%]">
-                <p className="mb-3 text-[11px] uppercase tracking-[0.22em] text-gray-500">
+                <p className="mb-3 text-[12px] uppercase tracking-[0.22em] text-gray-500">
                   {year}
                 </p>
-                <h3 className="mb-4 text-[24px] md:text-[32px] font-light leading-[1.1] text-[#2b2b2b]">
+                <h3 className="mb-4 text-[32px] md:text-[32px] font-light leading-[1.1] text-[#2b2b2b]">
                   {milestones[year].title}
                 </h3>
-                <p className="text-[15px] md:text-[17px] font-light leading-8 text-gray-700 max-w-xl">
+                <p className="text-[16px] md:text-[16px] font-light leading-8 text-gray-700 max-w-xl">
                   {milestones[year].desc}
                 </p>
               </div>

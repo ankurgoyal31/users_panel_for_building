@@ -100,14 +100,14 @@ function StatItem({ value, suffix, label, isVisible, delay, showDivider }) {
         transitionDelay: `${delay}ms`,
       }}
     >
-      <div className="w-7 h-[1px] bg-[#0095e6]/45 mx-auto mb-4"></div>
+      {/* <div className="w-7 h-[1px] bg-[#0095e6]/45 mx-auto mb-4"></div> */}
 
-      <h2 className="text-[34px] sm:text-[40px] md:text-[48px] lg:text-[56px] font-light tracking-[-0.03em] leading-none text-black whitespace-nowrap">
+      <h2 className="text-[34px] sm:text-[40px] md:text-[48px] lg:text-[48px] font-light tracking-[-0.03em] leading-none text-black whitespace-nowrap">
         {count.toLocaleString()}
         {suffix}
       </h2>
 
-      <h5 className="text-[11px] md:text-[12px] lg:text-[13px] text-black/60 mt-3 leading-[1.6] uppercase tracking-[0.12em] max-w-[220px] mx-auto">
+      <h5 className="text-[14px] md:text-[14px] lg:text-[14px] text-black/80 mt-3 leading-[1.6] uppercase tracking-[0.12em] max-w-[220px] mx-auto">
         {label}
       </h5>
 

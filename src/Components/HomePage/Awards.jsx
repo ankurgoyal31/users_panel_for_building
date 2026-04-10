@@ -160,7 +160,7 @@ export default function Awards() {
       <div className="absolute inset-0 bg-black/50"></div>
 
       <div className="relative z-10 max-w-4xl px-6 mx-auto text-white">
-        <h2 className="mb-16 text-3xl font-light tracking-wide text-center uppercase md:text-4xl">
+        <h2 className="mb-16 text-[36px] font-light tracking-wide text-center uppercase md:text-[36px]">
           Awards
         </h2>
 
@@ -181,11 +181,11 @@ export default function Awards() {
                 key={i}
                 className="h-[180px] py-5 border-b border-white/30 flex flex-col justify-center"
               >
-                <p className="text-sm opacity-80 tracking-[2px]">{a.date}</p>
-                <h3 className="mt-2 text-lg md:text-xl font-semibold tracking-[2px] uppercase">
+                <p className="text-[14px] opacity-80 tracking-[2px]">{a.date}</p>
+                <h3 className="mt-2 text-lg md:text-[20px] font-semibold tracking-[2px] uppercase">
                   {a.title}
                 </h3>
-                <p className="mt-2 text-sm md:text-[15px] opacity-85 leading-relaxed">
+                <p className="mt-2 text-[16px] md:text-[16px] opacity-85 leading-relaxed">
                   {a.desc}
                 </p>
               </div>
