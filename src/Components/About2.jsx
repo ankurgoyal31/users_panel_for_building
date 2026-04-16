@@ -1,8 +1,8 @@
 import React from "react";
-import bannerImg from "../assets/images/aboutus-hero-section.png";
+import bannerImg from "../assets/ourStory/banner.png";
 import dir1 from "../assets/img/director1.png";
 import dir2 from "../assets/img/director2.png";
-import img1 from "../assets/images/aboutus-crafting-landmarks.png";
+import img1 from "../assets/ourStory/intro.png";
 import img2 from "../assets/img/about/UBBanner 4.png";
 import img3 from "../assets/img/about/UBBanner 5.png";
 import img4 from "../assets/img/about/UBBanner 6.png";

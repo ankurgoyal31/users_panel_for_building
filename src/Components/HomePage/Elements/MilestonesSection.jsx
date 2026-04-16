@@ -1,17 +1,20 @@
 import React, { useState, useRef, useEffect } from "react";
-import img2002 from "../../../assets/img/2002.jpg";
-import img2007 from "../../../assets/img/2007.jpg";
-import img2022 from "../../../assets/img/2022.jpg";
-import img2023 from "../../../assets/img/2023.jpg";
-import img2024 from "../../../assets/img/2024.jpg";
-import img2025 from "../../../assets/img/2025.jpg";
+import img1 from '../../../assets/milestones/2002.png'
+import img2 from '../../../assets/milestones/2007.png'
+import img3 from '../../../assets/milestones/2022.png'
+import img4 from '../../../assets/milestones/2025.png'
 
 export default function MilestonesSection() {
+<<<<<<< HEAD
  const years = ["2002", "2007", "2022", "2025"];
+=======
+  const years = ["2002", "2007", "2022", "2025"];
+>>>>>>> temp-fix
 
 const milestones = {
   2002: {
     title: "The Genesis",
+<<<<<<< HEAD
     desc: "A commitment to excellence that laid the foundation for our journey.",
     img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e",
   },
@@ -29,6 +32,25 @@ const milestones = {
     title: "The New Vanguard",
     desc: "A new era of living focused on wellness, technology, and refined luxury.",
     img: "https://images.unsplash.com/photo-1600607687644-c7171b42498f",
+=======
+    desc: "A commitment to excellence is born, setting a new standard for regional development.",
+    img: img1,
+  },
+  2007: {
+    title: "Strategic Evolution",
+    desc: "Scaling our capabilities to meet the complexities of high-density urban luxury.",
+    img: img2,
+  },
+  2022: {
+    title: "Vertical Mastery",
+    desc: "The completion of our flagship towers, cementing our status as masters of the skyline.",
+    img: img3,
+  },
+  2025: {
+    title: "The New Vanguard",
+    desc: "Introducing a new era of residential living that prioritises wellness, tech-integration, and understated opulence.",
+    img: img4,
+>>>>>>> temp-fix
   },
 };
 

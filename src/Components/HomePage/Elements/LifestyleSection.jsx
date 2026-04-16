@@ -8,7 +8,7 @@ export default function LifestyleSection() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    fetch(`${BASE_URL}/api/projects`)
+     fetch("/proxy-api/api/projects")
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

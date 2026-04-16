@@ -46,13 +46,10 @@ const InstagramSection = () => {
             >
               {/* IMAGE */}
               <img
-                src={post.image}
-                alt="Instagram"
-                className="object-cover w-full h-[280px] md:h-[360px] xl:h-[420px] transition-transform duration-700 group-hover:scale-110"
-              />
-
-              {/* DARK HOVER OVERLAY */}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-500"></div>
+  src={post.image}
+  alt="Instagram"
+  className="object-cover w-[110%] max-w-none h-[400px] sm:h-[240px] md:h-[360px] xl:h-[380px] transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/35 transition-all duration-400"></div>
 
               {/* GRADIENT DEPTH */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-60"></div>

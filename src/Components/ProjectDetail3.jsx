@@ -10,7 +10,13 @@ import "swiper/css/effect-fade";
 import video from "../assets/GreenMeadows.mov";
 import AutoReveal from "./AutoReveal";
 import InstagramSection from "./InstagramSection";
-
+import intro from '../assets/projects/intro.png'
+import plan from '../assets/projects/plan.png'
+import gallery from '../assets/projects/gallery.png'
+import location from '../assets/projects/location.png'
+import construction from '../assets/projects/con.jpg'
+import about from '../assets/projects/about.png'
+import amenitiese from '../assets/projects/ame.png'
 const BASE_URL = "/proxy-api";
 
 const getImageUrl = (path) => {
@@ -32,7 +38,46 @@ export default function ProjectDetail() {
     message: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
+//==============================STATIC SHOWCASE START==============================
 
+const showcaseItems = [
+  {
+    label: "About",
+    img: about,
+  },
+  {
+    label: "Plans",
+    img: plan,
+  },
+  {
+    label: "Amenities",
+    img: amenitiese,
+  },
+  {
+    label: "Location",
+    img: location,
+  },
+  {
+    label: "Gallery",
+    img: gallery,
+  },
+  {
+    label: "Construction",
+    img: construction,
+  },
+];
+
+const [activeShowcase, setActiveShowcase] = useState("About");
+
+const activeShowcaseItem =
+  showcaseItems.find((item) => item.label === activeShowcase) ||
+  showcaseItems[0];
+
+const activeShowcaseIndex = showcaseItems.findIndex(
+  (item) => item.label === activeShowcase
+);
+
+//==============================STATIC SHOWCASE END==============================
   useEffect(() => {
     fetch(`${BASE_URL}/api/projects/${slug}`)
       .then((res) => res.json())
@@ -352,12 +397,12 @@ export default function ProjectDetail() {
           Amenities
         </button>
 
-        <button
+        {/* <button
           onClick={() => scrollToSection("highlights")}
           className="text-[#1b1b1b] hover:text-black transition uppercase"
         >
           Highlights
-        </button>
+        </button> */}
 
         <button
           onClick={() => scrollToSection("walkthrough")}
@@ -414,21 +459,21 @@ export default function ProjectDetail() {
 
             <div style={S.overviewImgWrap}>
               <img
-                src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1974&auto=format&fit=crop"
+                src={intro}
                 alt="Project"
                 style={S.overviewImg}
               />
-              <div style={S.overviewImgTag}>Luxury Residences</div>
+              {/* <div style={S.overviewImgTag}>Luxury Residences</div> */}
             </div>
           </div>
         </section>
 
-        {/* ================= SHOWCASE ================= */}
-        {mediaTabs.length > 0 && activeMediaItem && (
+        {/* ================= SHOWCASE DYNAMIC ================= */}
+        {/* {mediaTabs.length > 0 && activeMediaItem && (
           <section id="plans" style={S.showcase}>
             <div style={S.showcaseShell}>
               <div style={S.showcaseHeader}>
-                {/* <span style={S.label}>02 — Plans & Media</span> */}
+               
                 <h2 style={S.heading}>
                   Project Showcase
                 </h2>
@@ -436,13 +481,7 @@ export default function ProjectDetail() {
 
               <div className="pd-showcase-layout">
                 <div className="pd-showcase-menu">
-                  {/* <div style={S.menuMeta}>
-                    <span style={S.menuMetaText}>Browse</span>
-                    <span style={S.menuMetaText}>
-                      {String(activeMediaIndex + 1).padStart(2, "0")} /{" "}
-                      {String(mediaTabs.length).padStart(2, "0")}
-                    </span>
-                  </div> */}
+                 
 
                   {mediaTabs.map((tab, i) => {
                     const active = activeMedia === tab.label;
@@ -490,7 +529,64 @@ export default function ProjectDetail() {
               </div>
             </div>
           </section>
-        )}
+        )} */}
+
+        {/* ================= SHOWCASE STATIC ================= */}
+          <section id="plans" style={S.showcase}>
+  <div style={S.showcaseShell}>
+    <div style={S.showcaseHeader}>
+      <h2 style={S.heading}>Project Showcase</h2>
+    </div>
+
+    <div className="pd-showcase-layout">
+      <div className="pd-showcase-menu">
+        {showcaseItems.map((item, i) => {
+          const active = activeShowcase === item.label;
+
+          return (
+            <button
+              key={item.label}
+              onClick={() => setActiveShowcase(item.label)}
+              style={{
+                ...S.menuItem,
+                ...(active ? S.menuItemActive : {}),
+              }}
+              className={`pd-menu-item${
+                active ? " pd-menu-item--active" : ""
+              }`}
+            >
+              <span style={S.menuItemNum}>
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span style={S.menuItemLabel}>{item.label}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      <div style={S.visual}>
+        <div style={S.visualFrame}>
+          <img
+            key={activeShowcaseItem.label}
+            src={activeShowcaseItem.img}
+            alt={activeShowcaseItem.label}
+            style={S.visualImg}
+            className="pd-visual-img"
+          />
+          <div style={S.visualFooter}>
+            <span style={S.visualFooterLabel}>
+              {activeShowcaseItem.label}
+            </span>
+            <span style={S.visualFooterCount}>
+              {String(activeShowcaseIndex + 1).padStart(2, "0")} /{" "}
+              {String(showcaseItems.length).padStart(2, "0")}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
         {/* ================= AMENITIES ================= */}
         {featureGroups.length > 0 && (
@@ -1520,9 +1616,11 @@ const css = `
   transition: background 0.25s;
 }
 
-.pd-menu-item:hover::before,
-.pd-menu-item--active::before {
+.pd-menu-item:hover::before {
   background: rgba(26, 26, 26, 0.8);
+}
+.pd-menu-item--active::before {
+  background: transparent;
 }
 
 .pd-visual-img:hover {
