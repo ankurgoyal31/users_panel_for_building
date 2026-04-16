@@ -48,8 +48,7 @@ export default function App() {
         {/* Static Pages */}
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/projects/:slug" element={<ProjectsDetails3 />} />
-        {/* <Route path="/projects2/:slug" element={<ProjectsDetails2 />} />
-        <Route path="/projects3/:slug" element={<ProjectsDetails3 />} /> */}
+        
         <Route path="/connect" element={<IndexContact />} />
         <Route path="/ourstory" element={<AboutUsPage2 />} />
         {/* <Route path="/ourstory2" element={<AboutUsPage2 />} /> */}

@@ -1,53 +1,52 @@
 import React, { useEffect, useRef, useState } from "react";
-
+import img1 from '../../assets/history/1.png'
+import img2 from '../../assets/history/2.png'
+import img3 from '../../assets/history/3.png'
+import img4 from '../../assets/history/4.png'
+import img5 from '../../assets/history/5.png'
 const timelineData = [
   {
-    year: "2003",
-    title: "Where the story began",
+    // year: "2003",
+    title: "The Beginning: A Solid Foundation",
     description:
-      "Our journey began with a vision to shape more thoughtful living environments through quality, trust, and a long-term commitment to responsible development.",
-    image:
-      "https://images.unsplash.com/photo-1460317442991-0ec209397118?q=80&w=1600&auto=format&fit=crop",
+      "Our journey didn't start with skyscrapers, but with a single, honest brick. Back in 2002, we branched out from Rajasthan’s largest brick manufacturer to build something bigger. We wanted to move beyond materials and start creating actual homes where families could thrive, grounded in ethics and real quality.",
+    image: img1,
     imageStyle: "portrait",
     variant: "standard",
   },
   {
-    year: "2008",
-    title: "Built on trust and steady growth",
+    // year: "2008",
+    title: "A Vision for Everyone",
     description:
-      "As our presence grew, every milestone reinforced our focus on execution, customer confidence, and spaces that balance aesthetics with functionality.",
-    image:
-      "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=1600&auto=format&fit=crop",
+      "Real estate shouldn't just be for the few. In 2008, we launched 'Unique Shree' because we believe everyone deserves a front door to call their own. Our 'Hamara Sapna' initiative is all about making quality housing affordable, ensuring that the dream of homeownership is within reach for every family.",
+    image: img2,
     imageStyle: "landscape",
     variant: "standard",
   },
   {
-    year: "2014",
-    title: "Creating communities, not just buildings",
+    // year: "2014",
+    title: "Innovation Meets Tradition",
     description:
-      "This milestone deserves a stronger moment in the narrative, so instead of following the same split pattern, it expands into a more immersive editorial composition with layered imagery and text.",
-    image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1600&auto=format&fit=crop",
+      "We don’t just build concrete boxes; we design spaces that feel like home. By blending world-class technology with local sensibilities, we’ve delivered over 50 landmark projects. Whether it’s a luxury apartment or a professional workspace, our goal is to bring international living standards to your very own neighborhood.",
+    image: img3,
     imageStyle: "feature",
     variant: "featured",
   },
   {
-    year: "2018",
-    title: "A stronger design philosophy",
+    // year: "2018",
+    title: "Growing Roots in Rajasthan",
     description:
-      "Our work embraced a more refined architectural language, bringing together modern sensibilities, practical layouts, and elevated visual character.",
-    image:
-      "https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1600&auto=format&fit=crop",
+      "In just a few years, we went from a new name to a trusted household brand. By focusing on what people actually needed reliability and transparency we quickly became Rajasthan’s top developer. We’ve always believed that if you build with integrity, the community will grow right alongside you.",
+    image: img4,
     imageStyle: "square",
     variant: "standard",
   },
   {
-    year: "2024",
-    title: "Building forward with purpose",
+    // year: "2024",
+    title: "Looking Toward the Future",
     description:
-      "Today, we continue to shape future-ready spaces with a stronger design vision, deeper customer understanding, and a commitment to lasting value.",
-    image:
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1600&auto=format&fit=crop",
+      "After 22 years and 13,000 happy families, we’re just getting started. From Jaipur to Mumbai, we’re expanding our footprint while staying true to our roots. As we venture into healthcare and hospitality, our mission remains the same: creating spaces that inspire joy, professionalism, and a better tomorrow.",
+    image: img5,
     imageStyle: "portraitLarge",
     variant: "standard",
   },
@@ -239,13 +238,17 @@ function FeaturedTimelineRow({ item }) {
   return (
     <div
       ref={ref}
-      className={`timeline-reveal relative pl-8 md:pl-0 ${isVisible ? "is-visible" : ""}`}
+      className={`timeline-reveal relative pl-8 md:pl-0 ${
+        isVisible ? "is-visible" : ""
+      }`}
     >
       <TimelineDot />
 
       <div className="relative z-10 mt-2">
         <div className="relative overflow-visible px-5 py-5 sm:px-6 sm:py-6 md:px-8 md:py-8 lg:px-10 lg:py-10">
           <div className="grid items-center gap-6 md:grid-cols-[1.15fr_0.85fr] md:gap-8 lg:gap-12">
+            
+            {/* IMAGE */}
             <div className="relative timeline-card">
               <div className="timeline-image-wrap overflow-hidden">
                 <img
@@ -258,23 +261,15 @@ function FeaturedTimelineRow({ item }) {
                   }}
                 />
               </div>
-
-              <div
-                className={`absolute -bottom-4 -right-2 hidden w-[150px] rounded-[10px] bg-white/80 p-4 backdrop-blur md:block lg:w-[180px] transition-all duration-700 ${
-                  isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-                }`}
-                style={{ transitionDelay: "240ms" }}
-              >
-                <p className="mt-2 font-serif text-[22px] leading-none text-[#1f1a17] lg:text-[28px]">
-                  {item.year}
-                </p>
-              </div>
             </div>
 
+            {/* TEXT */}
             <div className="max-w-[420px] md:pl-4 timeline-text-stagger">
-              {/* <p className="mb-2 text-[12px] font-medium uppercase tracking-[0.32em] text-[#968c80]">
-                Highlighted Chapter
-              </p> */}
+              
+              {/* YEAR (moved here instead of glass box) */}
+              <p className="mb-2 text-[70px] leading-none text-[#b0a79c] font-light font-['Cormorant_Garamond',serif]">
+                {item.year}
+              </p>
 
               <h3 className="font-serif text-[24px] leading-[1.02] text-[#1f1a17] sm:text-[28px] md:text-[34px] lg:text-[40px]">
                 {item.title}
@@ -288,11 +283,9 @@ function FeaturedTimelineRow({ item }) {
 
               <div className="mt-6 inline-flex items-center gap-3">
                 <span className="h-[1px] w-8 bg-[#bcae9f]" />
-                {/* <span className="text-[10px] uppercase tracking-[0.28em] text-[#8f8478]">
-                  Defining phase
-                </span> */}
               </div>
             </div>
+
           </div>
         </div>
       </div>

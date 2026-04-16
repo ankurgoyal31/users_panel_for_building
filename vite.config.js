@@ -8,7 +8,7 @@ export default defineConfig({
     allowedHosts: ["uniquebuilders.onrender.com"],
     proxy: {
       "/proxy-api": {
-        target: "https://ub-admin-ejs.onrender.com",
+        target: "https://ub-admin-ejs-egx5.onrender.com",
         changeOrigin: true,
         secure: true,
         rewrite: (path) => path.replace(/^\/proxy-api/, ""),

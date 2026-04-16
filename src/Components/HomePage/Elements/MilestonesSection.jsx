@@ -1,64 +1,32 @@
 import React, { useState, useRef, useEffect } from "react";
-import img2002 from "../../../assets/img/2002.jpg";
-import img2007 from "../../../assets/img/2007.jpg";
-import img2022 from "../../../assets/img/2022.jpg";
-import img2023 from "../../../assets/img/2023.jpg";
-import img2024 from "../../../assets/img/2024.jpg";
-import img2025 from "../../../assets/img/2025.jpg";
+import img1 from '../../../assets/milestones/2002.png'
+import img2 from '../../../assets/milestones/2007.png'
+import img3 from '../../../assets/milestones/2022.png'
+import img4 from '../../../assets/milestones/2025.png'
 
 export default function MilestonesSection() {
-  const years = ["2002", "2007", "2008", "2010", "2011", "2012", "2013", "2015", "2018", "2024"];
+  const years = ["2002", "2007", "2022", "2025"];
 
-  const milestones = {
+const milestones = {
   2002: {
-    title: "Foundation",
-    desc: "Growing up around Mumbai’s rising skyscrapers, Vibhishek Pal Singh developed a fascination for structures and design, shaping his conviction that thoughtful spaces could transform how people lived, experienced comfort, and connected with their surroundings.",
-    img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e",
+    title: "The Genesis",
+    desc: "A commitment to excellence is born, setting a new standard for regional development.",
+    img: img1,
   },
   2007: {
-    title: "Breakthrough Project",
-    desc: "In 2007, he executed a 32,000 sq ft residential project at Kaligiri Road, marking a defining milestone. This experience strengthened his understanding of customer expectations and reinforced his belief in building homes that prioritise trust, quality, and long-term value.",
-    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+    title: "Strategic Evolution",
+    desc: "Scaling our capabilities to meet the complexities of high-density urban luxury.",
+    img: img2,
   },
-  2008: {
-    title: "Commercial Development",
-    desc: "Stepping into commercial real estate, he expanded his vision beyond housing. These developments refined his approach to space planning, functionality, and location strategy, helping him create environments that support both business growth and community interaction.",
-    img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab",
+  2022: {
+    title: "Vertical Mastery",
+    desc: "The completion of our flagship towers, cementing our status as masters of the skyline.",
+    img: img3,
   },
-  2010: {
-    title: "Expansion Phase",
-    desc: "With growing confidence and experience, the journey entered a phase of steady expansion. Multiple residential projects were developed, each reflecting a deeper commitment to design consistency, construction quality, and delivering value-driven living spaces.",
-    img: "https://images.unsplash.com/photo-1600607687644-c7171b42498f",
-  },
-  2011: {
-    title: "Affordable Housing",
-    desc: "Recognising the need for accessible homes, the focus shifted toward affordable housing. The goal was to make thoughtfully designed living spaces available to a wider audience without compromising on quality, comfort, or essential amenities.",
-    img: "https://images.unsplash.com/photo-1560185007-cde436f6a4d0",
-  },
-  2012: {
-    title: "Township Developments",
-    desc: "Large-scale township projects were introduced, integrating residential, recreational, and lifestyle elements into cohesive communities. These developments emphasised planning, connectivity, and a balanced living experience within self-sustained environments.",
-    img: "https://images.unsplash.com/photo-1599423300746-b62533397364",
-  },
-  2013: {
-    title: "Landmark Innovation",
-    desc: "This phase marked the introduction of landmark projects that pushed the boundaries of design and lifestyle. With a focus on premium features and distinctive architecture, these developments elevated the overall brand perception and market presence.",
-    img: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6",
-  },
-  2015: {
-    title: "Architectural Innovation",
-    desc: "Design innovation became central to the vision, with greater attention to aesthetics, spatial flow, and modern architectural techniques. Projects during this period reflected a refined design language and a stronger emphasis on experiential living.",
-    img: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde",
-  },
-  2018: {
-    title: "Expansion Beyond Rajasthan",
-    desc: "The journey expanded beyond Rajasthan, entering new markets and geographies. This step signified growth, adaptability, and the ambition to deliver the same level of trust and quality across diverse urban landscapes.",
-    img: "https://images.unsplash.com/photo-1494526585095-c41746248156",
-  },
-  2024: {
-    title: "Plot Developments",
-    desc: "The focus evolved to plotted developments, offering flexibility and ownership freedom to customers. These projects combine strategic locations with long-term investment potential, catering to a new generation of buyers seeking customisable living solutions.",
-    img: "https://images.unsplash.com/photo-1600585154084-4e5fe7c39198",
+  2025: {
+    title: "The New Vanguard",
+    desc: "Introducing a new era of residential living that prioritises wellness, tech-integration, and understated opulence.",
+    img: img4,
   },
 };
 

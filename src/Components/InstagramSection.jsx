@@ -42,11 +42,9 @@ const InstagramSection = () => {
               className="group relative overflow-hidden bg-white border border-black/8"
             >
               <img
-                src={post.image}
-                alt="Instagram"
-                className="object-cover w-full h-[200px] sm:h-[240px] md:h-[260px] xl:h-[280px] transition-transform duration-700 group-hover:scale-105"
-              />
-
+  src={post.image}
+  alt="Instagram"
+  className="object-cover w-[110%] max-w-none h-[400px] sm:h-[240px] md:h-[360px] xl:h-[380px] transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/35 transition-all duration-400"></div>
 
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
