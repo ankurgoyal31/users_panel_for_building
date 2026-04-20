@@ -66,12 +66,12 @@ const InstagramSection = () => {
                 href={post.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative overflow-hidden bg-white shrink-0 w-[260px] sm:w-[300px] md:w-[340px] xl:w-[360px]"
+                className="group relative overflow-hidden bg-white shrink-0 w-[260px] sm:w-[300px] md:w-[340px] xl:w-[360px] aspect-[9/16]"
               >
                 <img
                   src={post.image}
                   alt="Instagram"
-                  className="object-cover w-full h-[420px] sm:h-[480px] md:h-[560px] xl:h-[550px] transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
                 />
 
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/35 transition-all duration-500"></div>

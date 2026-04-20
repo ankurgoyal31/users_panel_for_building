@@ -384,75 +384,114 @@ export default function CareerPage() {
       </main>
 
       {/* MODAL */}
-      {selectedJob && (
-        <div className="fixed inset-0 z-[999] bg-black/70 flex items-center justify-center px-4 py-8">
-          <div className="relative w-full max-w-2xl bg-white border border-black/10 shadow-[0_25px_80px_rgba(0,0,0,0.25)] max-h-[90vh] overflow-y-auto">
-            <button
-              onClick={() => setSelectedJob(null)}
-              className="absolute top-4 right-4 text-black/45 hover:text-black text-2xl"
-            >
-              ✕
-            </button>
+   {selectedJob && (
+  <div className="fixed inset-0 z-[999] bg-black/70 flex items-center justify-center px-4 py-8">
+    <div className="relative w-full max-w-5xl bg-white border border-black/10 shadow-[0_25px_80px_rgba(0,0,0,0.25)] max-h-[90vh] overflow-y-auto">
+      
+      {/* CLOSE BUTTON */}
+      <button
+        onClick={() => setSelectedJob(null)}
+        className="absolute top-4 right-4 text-black/45 hover:text-black text-2xl z-20"
+      >
+        ✕
+      </button>
 
-            <div className="p-8 md:p-10">
-              <p className="text-[11px] uppercase tracking-[0.24em] text-black/40 mb-3">
-                Application Form
-              </p>
+      <div className="grid md:grid-cols-2">
+        
+        {/* 🔹 LEFT SIDE - JOB DETAILS */}
+        <div className="bg-[#f8f8f8] p-8 md:p-10 border-r border-black/10">
+          <p className="text-[11px] uppercase tracking-[0.24em] text-black/40 mb-3">
+            Job Details
+          </p>
 
-              <h2 className="text-2xl md:text-3xl font-light text-[#171717] mb-2">
-                Apply for {selectedJob.title}
-              </h2>
+          <h2 className="text-2xl md:text-3xl font-light text-[#171717] mb-4">
+            {selectedJob.title}
+          </h2>
 
-              <p className="text-[15px] leading-7 text-black/55 mb-8">
-                Please fill in your details and upload your resume to apply for
-                this opportunity.
-              </p>
+          <div className="mb-6">
+            <p className="text-[12px] uppercase tracking-[0.2em] text-black/40 mb-1">
+              Department
+            </p>
+            <p className="text-[15px] text-black/70">
+              {selectedJob.department}
+            </p>
+          </div>
 
-              <form className="space-y-5">
-                <input
-                  type="text"
-                  placeholder="Full Name"
-                  className="w-full border-b border-black/15 px-0 py-3 outline-none text-[15px]"
-                />
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  className="w-full border-b border-black/15 px-0 py-3 outline-none text-[15px]"
-                />
-                <input
-                  type="tel"
-                  placeholder="Mobile Number"
-                  className="w-full border-b border-black/15 px-0 py-3 outline-none text-[15px]"
-                />
-                <input
-                  type="text"
-                  value={selectedJob.title}
-                  readOnly
-                  className="w-full border-b border-black/15 px-0 py-3 outline-none text-[15px] bg-transparent"
-                />
+          <div className="mb-6">
+            <p className="text-[12px] uppercase tracking-[0.2em] text-black/40 mb-1">
+              Experience
+            </p>
+            <p className="text-[15px] text-black/70">
+              {selectedJob.experience}
+            </p>
+          </div>
 
-                <textarea
-                  placeholder="Tell us briefly about your experience"
-                  rows={4}
-                  className="w-full border border-black/12 px-4 py-4 outline-none text-[15px] resize-none"
-                />
-
-                <label className="w-full flex flex-col items-center justify-center border border-dashed border-black/20 p-8 cursor-pointer hover:border-black transition-all duration-300">
-                  <input type="file" className="hidden" />
-                  <p className="text-sm text-black/55">
-                    Click to upload your CV (PDF, DOC, DOCX)
-                  </p>
-                </label>
-
-                <button className="w-full bg-black text-white py-4 text-sm uppercase tracking-[0.18em] hover:opacity-90 transition">
-                  Submit Application
-                </button>
-              </form>
-            </div>
+          <div>
+            <p className="text-[12px] uppercase tracking-[0.2em] text-black/40 mb-2">
+              Description
+            </p>
+            <p className="text-[15px] leading-7 text-black/65">
+              {selectedJob.description}
+            </p>
           </div>
         </div>
-      )}
 
+        {/* 🔹 RIGHT SIDE - FORM */}
+        <div className="p-8 md:p-10">
+          <p className="text-[11px] uppercase tracking-[0.24em] text-black/40 mb-3">
+            Application Form
+          </p>
+
+          <h2 className="text-2xl md:text-3xl font-light text-[#171717] mb-6">
+            Apply Now
+          </h2>
+
+          <form className="space-y-5">
+            <input
+              type="text"
+              placeholder="Full Name"
+              className="w-full border-b border-black/15 px-0 py-3 outline-none text-[15px]"
+            />
+            <input
+              type="email"
+              placeholder="Email Address"
+              className="w-full border-b border-black/15 px-0 py-3 outline-none text-[15px]"
+            />
+            <input
+              type="tel"
+              placeholder="Mobile Number"
+              className="w-full border-b border-black/15 px-0 py-3 outline-none text-[15px]"
+            />
+            <input
+              type="text"
+              value={selectedJob.title}
+              readOnly
+              className="w-full border-b border-black/15 px-0 py-3 outline-none text-[15px] bg-transparent"
+            />
+
+            <textarea
+              placeholder="Tell us briefly about your experience"
+              rows={4}
+              className="w-full border border-black/12 px-4 py-4 outline-none text-[15px] resize-none"
+            />
+
+            <label className="w-full flex flex-col items-center justify-center border border-dashed border-black/20 p-8 cursor-pointer hover:border-black transition-all duration-300">
+              <input type="file" className="hidden" />
+              <p className="text-sm text-black/55">
+                Click to upload your CV (PDF, DOC, DOCX)
+              </p>
+            </label>
+
+            <button className="w-full bg-black text-white py-4 text-sm uppercase tracking-[0.18em] hover:opacity-90 transition">
+              Submit Application
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+)}
       <AutoReveal>
         <InstagramSection />
       </AutoReveal>

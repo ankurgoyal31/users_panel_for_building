@@ -221,7 +221,7 @@ export default function Values() {
 
         {/* ================= CLOSING ================= */}
         <section className="bg-[#f7f3ee]">
-          <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 py-14 md:py-20">
+          <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 pt-14 pb-8 md:pt-20 md:pb-10">
             <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 md:gap-16 items-start">
               <div>
                 <p className="text-[17px] uppercase tracking-[0.28em] text-[#8b8074] mb-4">

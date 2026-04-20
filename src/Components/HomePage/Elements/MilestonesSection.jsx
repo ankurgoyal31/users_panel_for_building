@@ -5,28 +5,45 @@ import img3 from "../../../assets/milestones/2022.png";
 import img4 from "../../../assets/milestones/2025.png";
 
 export default function MilestonesSection() {
-  const years = ["2002", "2007", "2022", "2025"];
+  const years = ["2002", "2010", "2011", "2013", "2015", "2018", "2024"];
 
   const milestones = {
     2002: {
-      title: "The Genesis",
-      desc: "A commitment to excellence is born, setting a new standard for regional development.",
+      title: "The Foundation",
+      desc: `• The Beginning of a Vision: Established with a commitment to quality and integrity.
+• My Haveli: Launched as our flagship project, setting the benchmark for community living.`,
       img: img1,
     },
-    2007: {
-      title: "Strategic Evolution",
-      desc: "Scaling our capabilities to meet the complexities of high-density urban luxury.",
+    2010: {
+      title: "Reaching New Heights",
+      desc: `• Iconic Landmarks: A landmark year featuring the development of Apex Tower, Golf, and Solitaire, defining the skyline with luxury and precision.`,
       img: img2,
     },
-    2022: {
-      title: "Vertical Mastery",
-      desc: "The completion of our flagship towers, cementing our status as masters of the skyline.",
+    2011: {
+      title: "Revolutionizing Real Estate",
+      desc: `• Umang – Dreams for All: Launched one of Rajasthan’s first truly affordable housing concepts. By introducing quality homes starting at just ₹5 lakhs, we turned the dream of homeownership into a reality for thousands.`,
       img: img3,
     },
-    2025: {
-      title: "The New Vanguard",
-      desc: "Introducing a new era of residential living that prioritises wellness, tech-integration, and understated opulence.",
+    2013: {
+      title: "Regional Expansion",
+      desc: `• Golf Estate (Jodhpur): Brought world-class leisure to the Sun City. It remains one of the only golf-based residential projects in Rajasthan, blending sport with sophisticated living.`,
       img: img4,
+    },
+    2015: {
+      title: "Global Design Standards",
+      desc: `• IS Paradise: A fusion of international architectural aesthetics and modern comfort.
+• Iridium (Mumbai): Expanded our footprint into the Mumbai market with high-end elevations and cutting-edge design.`,
+      img: img1, // replace if you have new image
+    },
+    2018: {
+      title: "Strengthening the Core",
+      desc: `• Garden City (NCR/Neemrana): Solidified our presence in the National Capital Region (NCR) and Neemrana, catering to the growing industrial and residential demand in the corridor.`,
+      img: img2,
+    },
+    2024: {
+      title: "The Future of Urban Living",
+      desc: `• City Unique Life: Venturing into expansive plotting townships. We are creating curated spaces that offer the freedom of independent living within a structured, modern community.`,
+      img: img3,
     },
   };
 
@@ -82,9 +99,7 @@ export default function MilestonesSection() {
               key={year}
               className="relative flex flex-col items-center flex-shrink-0 w-full gap-8 snap-start md:flex-row"
             >
-              <span
-                className="absolute left-0 top-1/2 -translate-y-1/2 text-gray-300 select-none pointer-events-none text-[10rem] md:text-[20rem] lg:text-[33rem] opacity-20 leading-none"
-              >
+              <span className="absolute left-0 top-1/2 -translate-y-1/2 text-gray-300 select-none pointer-events-none text-[10rem] md:text-[20rem] lg:text-[33rem] opacity-20 leading-none">
                 {year}
               </span>
 
