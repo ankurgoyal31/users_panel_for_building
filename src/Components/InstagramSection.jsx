@@ -66,7 +66,7 @@ const InstagramSection = () => {
                 href={post.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative overflow-hidden bg-white shrink-0 w-[260px] sm:w-[300px] md:w-[340px] xl:w-[360px] aspect-[9/16]"
+                className="group relative overflow-hidden bg-white shrink-0 w-[260px] sm:w-[300px] md:w-[340px] xl:w-[360px] aspect-[4/5]"
               >
                 <img
                   src={post.image}
