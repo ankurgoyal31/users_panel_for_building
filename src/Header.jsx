@@ -188,6 +188,13 @@ const Header = () => {
             >
               TOWNSHIP
             </Link>
+            <Link
+              to="/projects?category=TOWNSHIP#project-tabs"
+              onClick={closeMenu}
+              className="block uppercase text-[14px] tracking-[0.24em] font-medium hover:opacity-70 transition-opacity duration-200"
+            >
+              Rentals
+            </Link>
 
             <Link
               to="/projects?category=HOSPITALITY#project-tabs"
