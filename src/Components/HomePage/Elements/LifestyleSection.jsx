@@ -56,7 +56,7 @@ export default function LifestyleSection() {
       </div>
 
       {/* Featured Projects Cards */}
-      {projects.length > 0 && (
+      {/* {projects.length > 0 && (
         <div className="py-16 px-6 container-fluid mx-auto">
           <h3 className="text-2xl font-light tracking-wide uppercase mb-10 ps-30">
             Featured Projects
@@ -88,7 +88,7 @@ export default function LifestyleSection() {
             ))}
           </div>
         </div>
-      )}
+      )} */}
     </section>
   );
 }

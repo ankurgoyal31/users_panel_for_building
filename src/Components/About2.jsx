@@ -209,11 +209,11 @@ export default function AboutUsPage() {
           <section className="relative z-20 -mt-16 md:-mt-20 px-6 md:px-10 lg:px-16">
             <div className="max-w-6xl mx-auto bg-white border border-black/8 shadow-[0_24px_80px_rgba(0,0,0,0.08)]">
               <div className="grid lg:grid-cols-[220px_1fr]">
-                <div className="border-b lg:border-b-0 lg:border-r border-black/8 px-6 py-8 md:px-8 md:py-10">
-                  <p className="text-[17px] uppercase tracking-[0.28em] text-black/40">
-                    Group Quote
-                  </p>
-                </div>
+                <div className="border-b lg:border-b-0 lg:border-r border-black/8 px-6 py-8 md:px-8 md:py-10 flex items-center justify-center">
+  <p className="text-[17px] uppercase tracking-[0.28em] text-black/40 text-center">
+    Philosophy
+  </p>
+</div>  
                 <div className="px-6 py-10 md:px-10 md:py-12">
                   <h2 className="text-lg md:text-2xl lg:text-3xl font-light leading-[1.2] text-[#171717]">
                     “We do not just build projects. We create trust, shape

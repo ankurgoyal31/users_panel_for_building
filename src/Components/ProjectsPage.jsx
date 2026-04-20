@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
 import InstagramSection from "./InstagramSection";
@@ -165,17 +165,11 @@ function CustomSelect({ options, value, onChange, placeholder }) {
 const FALLBACK_IMAGE =
   "https://via.placeholder.com/1200x800?text=Project+Image";
 
-function getObjectIdTimestamp(id = "") {
-  if (typeof id !== "string" || id.length < 8) return 0;
-  const ts = parseInt(id.substring(0, 8), 16);
-  return Number.isNaN(ts) ? 0 : ts;
-}
-
 function normalizeProjects(projects) {
   return [...projects].sort((a, b) => {
     const aTime = parseInt(a?._id?.substring(0, 8), 16);
     const bTime = parseInt(b?._id?.substring(0, 8), 16);
-    return bTime - aTime; // 🔥 last → first (latest on top)
+    return bTime - aTime;
   });
 }
 
@@ -190,6 +184,31 @@ export default function ProjectsPage() {
   const [error, setError] = useState("");
 
   const repeatedLogos = useMemo(() => [...demoLogos, ...demoLogos], []);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const tabsSectionRef = useRef(null);
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const categoryFromUrl = searchParams.get("category");
+
+    if (categoryFromUrl && categories.includes(categoryFromUrl)) {
+      setActiveTab(categoryFromUrl);
+    }
+
+    if (location.hash === "#project-tabs" && tabsSectionRef.current) {
+      setTimeout(() => {
+        const headerOffset = 130;
+        const elementTop =
+          tabsSectionRef.current.getBoundingClientRect().top + window.pageYOffset;
+
+        window.scrollTo({
+          top: elementTop - headerOffset,
+          behavior: "smooth",
+        });
+      }, 120);
+    }
+  }, [location.search, location.hash]);
 
   useEffect(() => {
     let isMounted = true;
@@ -314,16 +333,33 @@ export default function ProjectsPage() {
     };
   }, []);
 
-const filtered = useMemo(() => {
-  return allProjects
-    .filter((p) => p.category === activeTab)
-    .filter((p) => locFilter === "ALL" || p.location === locFilter)
-    .filter((p) => statusFilter === "ALL" || p.status === statusFilter)
-    .filter((p) => priceFilter === "ALL" || p.priceRange === priceFilter)
-    .reverse();
-}, [allProjects, activeTab, locFilter, statusFilter, priceFilter]);
+  const handleTabClick = (cat) => {
+    setActiveTab(cat);
 
-console.log(allProjects);
+    navigate(`/projects?category=${encodeURIComponent(cat)}#project-tabs`, {
+      replace: true,
+    });
+
+    if (tabsSectionRef.current) {
+      const headerOffset = 130;
+      const elementTop =
+        tabsSectionRef.current.getBoundingClientRect().top + window.pageYOffset;
+
+      window.scrollTo({
+        top: elementTop - headerOffset,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const filtered = useMemo(() => {
+    return allProjects
+      .filter((p) => p.category === activeTab)
+      .filter((p) => locFilter === "ALL" || p.location === locFilter)
+      .filter((p) => statusFilter === "ALL" || p.status === statusFilter)
+      .filter((p) => priceFilter === "ALL" || p.priceRange === priceFilter)
+      .reverse();
+  }, [allProjects, activeTab, locFilter, statusFilter, priceFilter]);
 
   return (
     <>
@@ -342,7 +378,6 @@ console.log(allProjects);
             {repeatedLogos.map((logo, index) => (
               <a
                 key={index}
-                // href={logo.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center"
@@ -358,42 +393,48 @@ console.log(allProjects);
         </div>
 
         {/* CATEGORY TABS */}
-        <div className="flex justify-center gap-10 mb-10 text-sm font-medium tracking-wide flex-wrap px-4">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveTab(cat)}
-              className={`pb-1 ${
-                activeTab === cat
-                  ? "text-black border-b-2 border-black"
-                  : "text-gray-500 hover:text-black"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+        <div
+          id="project-tabs"
+          ref={tabsSectionRef}
+          className="scroll-mt-[140px]"
+        >
+          <div className="flex justify-center gap-10 mb-10 text-sm font-medium tracking-wide flex-wrap px-4">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => handleTabClick(cat)}
+                className={`pb-1 transition duration-200 ${
+                  activeTab === cat
+                    ? "text-black border-b-2 border-black"
+                    : "text-gray-500 hover:text-black"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
 
-        {/* FILTERS */}
-        <div className="grid max-w-xl grid-cols-1 gap-5 px-6 mx-auto mb-12 sm:grid-cols-3">
-          <CustomSelect
-            options={locations}
-            value={locFilter}
-            onChange={setLocFilter}
-            placeholder="Location"
-          />
-          <CustomSelect
-            options={statusOptions}
-            value={statusFilter}
-            onChange={setStatusFilter}
-            placeholder="Status"
-          />
-          <CustomSelect
-            options={priceRanges}
-            value={priceFilter}
-            onChange={setPriceFilter}
-            placeholder="Budget"
-          />
+          {/* FILTERS */}
+          <div className="grid max-w-xl grid-cols-1 gap-5 px-6 mx-auto mb-12 sm:grid-cols-3">
+            <CustomSelect
+              options={locations}
+              value={locFilter}
+              onChange={setLocFilter}
+              placeholder="Location"
+            />
+            <CustomSelect
+              options={statusOptions}
+              value={statusFilter}
+              onChange={setStatusFilter}
+              placeholder="Status"
+            />
+            <CustomSelect
+              options={priceRanges}
+              value={priceFilter}
+              onChange={setPriceFilter}
+              placeholder="Budget"
+            />
+          </div>
         </div>
 
         {/* STATES */}
@@ -414,76 +455,56 @@ console.log(allProjects);
         )}
 
         {/* PROJECT GRID */}
-{!loading && !error && filtered.length > 0 && (
-  <div className="grid w-full grid-cols-1 gap-y-14 gap-x-8 px-6 mx-auto sm:grid-cols-2 lg:grid-cols-3">
-    {filtered.map((project) => (
-      <Link
-        to={`/projects/${project.slug}`}
-        key={project._id}
-        className="group block"
-      >
-        <article className="bg-white">
-          {/* IMAGE */}
-          <div className="relative overflow-hidden bg-[#f4efe8]">
-            <img
-              src={project.heroImage1 || FALLBACK_IMAGE}
-              alt={project.name || "Project"}
-              className="w-full h-[520px] md:h-[600px] object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
-              loading="lazy"
-              decoding="async"
-              onError={(e) => {
-                e.currentTarget.src = FALLBACK_IMAGE;
-              }}
-            />
+        {!loading && !error && filtered.length > 0 && (
+          <div className="grid w-full grid-cols-1 gap-y-14 gap-x-8 px-6 mx-auto sm:grid-cols-2 lg:grid-cols-3">
+            {filtered.map((project) => (
+              <Link
+                to={`/projects/${project.slug}`}
+                key={project._id}
+                className="group block"
+              >
+                <article className="bg-white">
+                  <div className="relative overflow-hidden bg-[#f4efe8]">
+                    <img
+                      src={project.heroImage1 || FALLBACK_IMAGE}
+                      alt={project.name || "Project"}
+                      className="w-full h-[520px] md:h-[600px] object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
+                      loading="lazy"
+                      decoding="async"
+                      onError={(e) => {
+                        e.currentTarget.src = FALLBACK_IMAGE;
+                      }}
+                    />
+                  </div>
+
+                  <div className="pt-6 md:pt-7">
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                      <p className="text-[10px] uppercase tracking-[0.3em] text-[#8b8074]">
+                        {project.category || "Project"}
+                      </p>
+
+                      {project.status && (
+                        <p className="text-[10px] uppercase tracking-[0.24em] text-[#8b8074] whitespace-nowrap">
+                          {project.status}
+                        </p>
+                      )}
+                    </div>
+
+                    <h3 className="text-[24px] md:text-[28px] font-light leading-[1.15] text-[#2f2a26] mb-3 transition-colors duration-300 group-hover:text-[#8b6f56]">
+                      {project.name}
+                    </h3>
+
+                    {(project.location || project.address) && (
+                      <p className="text-[14px] md:text-[15px] text-[#7a7066] leading-7 mb-4">
+                        {project.location || project.address}
+                      </p>
+                    )}
+                  </div>
+                </article>
+              </Link>
+            ))}
           </div>
-
-          {/* CONTENT */}
-          <div className="pt-6 md:pt-7">
-            <div className="flex items-start justify-between gap-4 mb-4">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-[#8b8074]">
-                {project.category || "Project"}
-              </p>
-
-              {project.status && (
-                <p className="text-[10px] uppercase tracking-[0.24em] text-[#8b8074] whitespace-nowrap">
-                  {project.status}
-                </p>
-              )}
-            </div>
-
-            <h3 className="text-[24px] md:text-[28px] font-light leading-[1.15] text-[#2f2a26] mb-3 transition-colors duration-300 group-hover:text-[#8b6f56]">
-              {project.name}
-            </h3>
-
-            {(project.location || project.address) && (
-              <p className="text-[14px] md:text-[15px] text-[#7a7066] leading-7 mb-4">
-                {project.location || project.address}
-              </p>
-            )}
-
-            {/* <div className="w-12 h-[1px] bg-[#d7cec3] mb-5 transition-all duration-500 group-hover:w-20"></div> */}
-
-            {/* <p className="text-[14px] md:text-[15px] leading-7 text-[#6f655b] mb-6">
-              {project.aboutDescription
-                ? `${project.aboutDescription.slice(0, 110)}...`
-                : "Thoughtfully designed spaces with strong planning, refined aesthetics, and a focus on lasting value."}
-            </p> */}
-
-            {/* <div className="flex items-center justify-between gap-4">
-              <span className="text-[11px] uppercase tracking-[0.24em] text-[#2f2a26]">
-                Explore Project
-              </span>
-
-              <span className="inline-flex items-center justify-center w-10 h-10 border border-[#d7cec3] text-[#2f2a26] transition-all duration-300 group-hover:border-[#2f2a26] group-hover:translate-x-1">
-                →
-              </span>
-            </div> */}
-          </div>
-        </article>
-      </Link>
-    ))}
-  </div>
-)}
+        )}
 
         <Newsletter />
         <InstagramSection />

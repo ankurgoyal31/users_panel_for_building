@@ -41,10 +41,10 @@ export default function ProjectDetail() {
 //==============================STATIC SHOWCASE START==============================
 
 const showcaseItems = [
-  {
-    label: "About",
-    img: about,
-  },
+  // {
+  //   label: "About",
+  //   img: about,
+  // },
   {
     label: "Plans",
     img: plan,
@@ -321,23 +321,27 @@ const activeShowcaseIndex = showcaseItems.findIndex(
           </div>
         </section>
 
-        {project.logoImage && (
-          <section className="relative z-20 px-6 md:px-10 lg:px-16 -mt-14 md:-mt-16">
-            <div className="max-w-7xl mx-auto">
-              <div className="flex justify-center">
-                <div className="group relative inline-flex items-center justify-center rounded-none bg-white/96 backdrop-blur-xl border border-black/8 shadow-[0_24px_70px_rgba(0,0,0,0.12)] px-8 md:px-10 lg:px-12 py-5 md:py-6">
-                  <div className="absolute inset-0 rounded-none bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(248,246,242,0.96))]"></div>
+       {project.logoImage && (
+  <section className="relative z-20 px-6 md:px-10 lg:px-16 -mt-16">
+    <div className="max-w-7xl mx-auto">
+      <div className="flex justify-center">
+        
+        {/* SMALL BOX */}
+        <div className="relative inline-flex items-center justify-center bg-white/95 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.12)] px-6 md:px-8 py-3 md:py-4">
+          
+          {/* LOGO BIGGER */}
+          <img
+            src={getImageUrl(project.logoImage)}
+            alt={project.name || "Project Logo"}
+            className="h-[70px] md:h-[90px] lg:h-[110px] w-auto object-contain"
+          />
+        
+        </div>
 
-                  <img
-                    src={getImageUrl(project.logoImage)}
-                    alt={project.name || "Project Logo"}
-                    className="relative z-10 h-[52px] md:h-[68px] lg:h-[82px] w-auto max-w-[220px] md:max-w-[300px] lg:max-w-[360px] object-contain"
-                  />
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
+      </div>
+    </div>
+  </section>
+)}
 
         {/* ================= QUICK FACT STRIP ================= */}
         <section className="relative z-10 mt-6 md:mt-8 px-6 md:px-10 lg:px-16">

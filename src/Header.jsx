@@ -1,8 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [open, setOpen] = React.useState(false);
   const [aboutOpen, setAboutOpen] = React.useState(false);
+
+  const closeMenu = () => {
+    setOpen(false);
+    setAboutOpen(false);
+  };
 
   return (
     <>
@@ -14,13 +20,13 @@ const Header = () => {
             alt="Mannat logo"
           />
 
-          <a href="/" className="flex items-center justify-center h-full">
+          <Link to="/" className="flex items-center justify-center h-full">
             <img
               src="https://realestate.bizsquared.com/wp-content/uploads/2023/03/UB-logo-white-1-1.png"
               className="h-[58px] md:h-[70px] w-auto object-contain"
               alt="UB logo"
             />
-          </a>
+          </Link>
 
           <button
             type="button"
@@ -39,10 +45,7 @@ const Header = () => {
       {open && (
         <div
           className="fixed inset-0 z-40 bg-black/60"
-          onClick={() => {
-            setOpen(false);
-            setAboutOpen(false);
-          }}
+          onClick={closeMenu}
         />
       )}
 
@@ -62,20 +65,14 @@ const Header = () => {
         </button>
 
         <div className="mt-28 px-12">
-          {/* <div className="mb-8">
-            <span className="block text-[11px] tracking-[0.45em] text-[#7E8AAF] uppercase">
-              Navigation
-            </span>
-            <div className="w-10 h-[1px] bg-[#CAD3EA] mt-3"></div>
-          </div> */}
-
           <div className="space-y-6 text-[#11205A]">
-            <a
-              href="/"
+            <Link
+              to="/"
+              onClick={closeMenu}
               className="block uppercase text-[14px] tracking-[0.24em] font-medium hover:opacity-70 transition-opacity duration-200"
             >
               HOME
-            </a>
+            </Link>
 
             <div>
               <button
@@ -118,61 +115,113 @@ const Header = () => {
                     aboutOpen ? "translate-y-0" : "-translate-y-2"
                   }`}
                 >
-                  <a
-                    href="/ourstory"
+                  <Link
+                    to="/ourstory"
+                    onClick={closeMenu}
                     className="block uppercase text-[12px] tracking-[0.18em] text-[#42507D] hover:text-[#11205A] transition-colors duration-200"
                   >
                     OUR STORY
-                  </a>
-                  
+                  </Link>
 
-                  <a
-                    href="/values"
+                  <Link
+                    to="/values"
+                    onClick={closeMenu}
                     className="block uppercase text-[12px] tracking-[0.18em] text-[#42507D] hover:text-[#11205A] transition-colors duration-200"
                   >
                     OUR VALUES
-                  </a>
-                  <a
-                    href="/our-impact"
+                  </Link>
+
+                  <Link
+                    to="/our-impact"
+                    onClick={closeMenu}
                     className="block uppercase text-[12px] tracking-[0.18em] text-[#42507D] hover:text-[#11205A] transition-colors duration-200"
                   >
                     OUR IMPACT
-                  </a>
-                  <a
-                    href="/csr"
+                  </Link>
+
+                  <Link
+                    to="/csr"
+                    onClick={closeMenu}
                     className="block uppercase text-[12px] tracking-[0.18em] text-[#42507D] hover:text-[#11205A] transition-colors duration-200"
                   >
                     CSR
-                  </a>
+                  </Link>
 
-                  <a
-                    href="/career"
+                  <Link
+                    to="/career"
+                    onClick={closeMenu}
                     className="block uppercase text-[12px] tracking-[0.18em] text-[#42507D] hover:text-[#11205A] transition-colors duration-200"
                   >
                     CAREERS
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
-            <a
-              href="/projects"
+
+            {/* <Link
+              to="/projects"
+              onClick={closeMenu}
               className="block uppercase text-[14px] tracking-[0.24em] font-medium hover:opacity-70 transition-opacity duration-200"
             >
               PROJECTS
-            </a>
-            <a
-              href="/real-estate-journal"
+            </Link> */}
+
+            <Link
+              to="/projects?category=RESIDENTIAL#project-tabs"
+              onClick={closeMenu}
+              className="block uppercase text-[14px] tracking-[0.24em] font-medium hover:opacity-70 transition-opacity duration-200"
+            >
+              RESIDENTIAL
+            </Link>
+
+            <Link
+              to="/projects?category=COMMERCIAL#project-tabs"
+              onClick={closeMenu}
+              className="block uppercase text-[14px] tracking-[0.24em] font-medium hover:opacity-70 transition-opacity duration-200"
+            >
+              COMMERCIAL
+            </Link>
+            <Link
+              to="/projects?category=TOWNSHIP#project-tabs"
+              onClick={closeMenu}
+              className="block uppercase text-[14px] tracking-[0.24em] font-medium hover:opacity-70 transition-opacity duration-200"
+            >
+              TOWNSHIP
+            </Link>
+
+            <Link
+              to="/projects?category=HOSPITALITY#project-tabs"
+              onClick={closeMenu}
+              className="block uppercase text-[14px] tracking-[0.24em] font-medium hover:opacity-70 transition-opacity duration-200"
+            >
+              HOSPITALITY
+            </Link>
+
+            
+
+            <Link
+              to="/projects?category=UNIQUE%20SHREE#project-tabs"
+              onClick={closeMenu}
+              className="block uppercase text-[14px] tracking-[0.24em] font-medium hover:opacity-70 transition-opacity duration-200"
+            >
+              UNIQUE SHREE
+            </Link>
+
+            <Link
+              to="/real-estate-journal"
+              onClick={closeMenu}
               className="block uppercase text-[14px] tracking-[0.24em] font-medium hover:opacity-70 transition-opacity duration-200"
             >
               JOURNAL
-            </a>
+            </Link>
 
-            <a
-              href="/connect"
+            <Link
+              to="/connect"
+              onClick={closeMenu}
               className="block uppercase text-[14px] tracking-[0.24em] font-medium hover:opacity-70 transition-opacity duration-200"
             >
               CONNECT
-            </a>
+            </Link>
           </div>
         </div>
       </div>

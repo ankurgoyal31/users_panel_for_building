@@ -61,7 +61,7 @@ export default function MilestonesSection() {
 
         return nextYear;
       });
-    }, 6000);
+    }, 20000);
 
     return () => clearInterval(interval);
   }, []);
