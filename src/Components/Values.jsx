@@ -3,20 +3,16 @@ import Header from "../Header";
 import Footer from "../Footer";
 import AutoReveal from "./AutoReveal";
 import InstagramSection from "./InstagramSection";
+import banner from "../assets/values/banner.png";
+import centric from '../assets/values/centric.png';
+import thoughtful from '../assets/values/thoughtful.png';
+import trust from '../assets/values/trust.png'; 
 
 /* ================= REAL ESTATE IMAGES ================= */
-const heroImg =
-  "https://images.unsplash.com/photo-1502005097973-6a7082348e28?q=80&w=2070";
-
-const residentialImg =
-  "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070";
-
-const planningImg =
-  "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2071";
-
-const trustImg =
-  "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2073";
-
+const heroImg = banner;
+const residentialImg = centric;
+const planningImg = thoughtful;
+const trustImg = trust;
 /* ================= VALUES DATA ================= */
 const valuesData = [
   {

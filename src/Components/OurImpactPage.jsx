@@ -3,7 +3,9 @@ import Header from "../Header";
 import Footer from "../Footer";
 import AutoReveal from "./AutoReveal";
 import InstagramSection from "./InstagramSection";
-
+import banner from "../assets/impact/banner.png";
+import sustainability from '../assets/impact/sustainability.png'
+import community from '../assets/impact/communities.png'
 const OurImpactPage = () => {
   return (
     <>
@@ -13,7 +15,7 @@ const OurImpactPage = () => {
         {/* ================= HERO ================= */}
         <section className="relative min-h-[72vh] md:min-h-[86vh] overflow-hidden">
           <img
-            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
+            src={banner}
             className="absolute inset-0 w-full h-full object-cover"
             alt="Our Impact"
           />
@@ -64,7 +66,7 @@ const OurImpactPage = () => {
               <div className="order-1 lg:order-2">
                 <div className="relative overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=2070&auto=format&fit=crop"
+                    src={sustainability}
                     className="w-full h-[340px] md:h-[500px] object-cover"
                     alt="Sustainable design in real estate"
                   />
@@ -79,7 +81,7 @@ const OurImpactPage = () => {
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] min-h-[380px] md:min-h-[500px]">
             <div className="relative order-2 lg:order-1">
               <img
-                src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=2070&auto=format&fit=crop"
+                src={community}
                 className="absolute inset-0 w-full h-full object-cover"
                 alt="Green real estate environment"
               />

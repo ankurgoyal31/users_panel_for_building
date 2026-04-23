@@ -95,13 +95,13 @@ export default function CSRPage() {
 
         {/* CSR CARDS */}
         <section className="bg-[#fcfaf7]">
-  <div className="max-w-7xl mx-auto px-6 py-16 md:py-20 grid sm:grid-cols-2 xl:grid-cols-4 gap-10 md:gap-14">
+  <div className="max-w-[95%] mx-auto px-2 py-16 md:py-20 grid sm:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-8">
 
     {csrData.map((item, i) => (
       <div key={i} className="group">
 
         {/* IMAGE */}
-        <div className="h-[380px] md:h-[440px] overflow-hidden mb-6">
+        <div className="h-[400px] md:h-[480px] overflow-hidden mb-6">
           <img
             src={item.image}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -120,7 +120,7 @@ export default function CSRPage() {
             {item.title}
           </h3>
 
-          <p className="text-[#6f655b] text-[15px] md:text-[17px] leading-8">
+          <p className="text-[#6f655b] text-[12px] md:text-[12px] leading-4">
             {item.desc}
           </p>
 
