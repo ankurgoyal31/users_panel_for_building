@@ -77,6 +77,36 @@ const activeShowcaseIndex = showcaseItems.findIndex(
   (item) => item.label === activeShowcase
 );
 
+// ---- NEW: map link + embed URL for Location tab (improved) ----
+const MAP_SHORT_LINK = "https://maps.app.goo.gl/qvp2BhAjUssJgx3v5";
+// Full embed src copied from Google Maps → Share → Embed a map:
+const MAP_EMBED_SRC =
+  "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3558.0416859980805!2d75.7742245!3d26.9021721!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db46efb1eaf25%3A0x70a50618b4db7a87!2sUnique%20IS%20Paradise!5e0!3m2!1sen!2sin!4v1777007476147!5m2!1sen!2sin";
+
+const mapEmbedUrl = useMemo(() => {
+  if (activeShowcase !== "Location") return null;
+  // Use exact embed src if provided (keeps marker/center/zoom)
+  if (MAP_EMBED_SRC) return MAP_EMBED_SRC;
+  const link =
+    project?.googleMapsLink ||
+    project?.locationLink ||
+    project?.locationMapUrl ||
+    project?.mapUrl ||
+    MAP_SHORT_LINK ||
+    project?.location ||
+    project?.address ||
+    null;
+  if (!link) return null;
+  // If link is a "lat,lng" pair (e.g. "26.9145,75.7878") embed using coords.
+  const latLngMatch = String(link).match(/(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)/);
+  if (latLngMatch) {
+    const q = encodeURIComponent(`${latLngMatch[1]},${latLngMatch[2]}`);
+    return `https://www.google.com/maps?q=${q}&z=17&output=embed`;
+  }
+  // Fallback: use link as query
+  const q = encodeURIComponent(link);
+  return `https://www.google.com/maps?q=${q}&z=17&output=embed`;
+}, [activeShowcase, project]);
 //==============================STATIC SHOWCASE END==============================
   useEffect(() => {
     fetch(`${BASE_URL}/api/projects/${slug}`)
@@ -317,6 +347,22 @@ const activeShowcaseIndex = showcaseItems.findIndex(
                   value={String(allFeatureCount || 0).padStart(2, "0")}
                 />
               </div>
+            </div>
+
+            <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/20 pt-8">
+              <InfoMiniItem label="Project Type" value="Luxury Residences" />
+              <InfoMiniItem
+                label="Media Sections"
+                value={String(mediaTabs.length || 0).padStart(2, "0")}
+              />
+              <InfoMiniItem
+                label="Highlights"
+                value={String(highlights.length || 0).padStart(2, "0")}
+              />
+              <InfoMiniItem
+                label="Amenities"
+                value={String(allFeatureCount || 0).padStart(2, "0")}
+              />
             </div>
           </div>
         </section>
@@ -570,13 +616,81 @@ const activeShowcaseIndex = showcaseItems.findIndex(
 
       <div style={S.visual}>
         <div style={S.visualFrame}>
-          <img
-            key={activeShowcaseItem.label}
-            src={activeShowcaseItem.img}
-            alt={activeShowcaseItem.label}
-            style={S.visualImg}
-            className="pd-visual-img"
-          />
+          {activeShowcaseItem.label === "Location" ? (
+            <div
+              key="location-wrap"
+              style={{
+                position: "relative",
+                width: "100%",
+                height: S.visualImg.height,
+                overflow: "hidden",
+                background: "#eee",
+              }}
+            >
+              {mapEmbedUrl ? (
+                <iframe
+                  src={mapEmbedUrl}
+                  title="Project location"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    border: 0,
+                    display: "block",
+                    objectFit: "cover",
+                  }}
+                  className="pd-visual-img"
+                  loading="lazy"
+                  allowFullScreen
+                />
+              ) : (
+                <a
+                  href={MAP_SHORT_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ display: "block", width: "100%", height: "100%" }}
+                >
+                  <img
+                    src={activeShowcaseItem.img}
+                    alt="Open location in maps"
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                </a>
+              )}
+
+              {/* Open in Maps button (bottom right) */}
+              <a
+                href={MAP_SHORT_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  position: "absolute",
+                  right: 14,
+                  bottom: 14,
+                  background: "rgba(0,0,0,0.7)",
+                  color: "#fff",
+                  padding: "10px 12px",
+                  fontSize: 12,
+                  textDecoration: "none",
+                  borderRadius: 6,
+                  zIndex: 5,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                }}
+                className="pd-open-maps"
+              >
+                Open in Google Maps
+              </a>
+            </div>
+          ) : (
+            <img
+              key={activeShowcaseItem.label}
+              src={activeShowcaseItem.img}
+              alt={activeShowcaseItem.label}
+              style={S.visualImg}
+              className="pd-visual-img"
+            />
+          )}
           <div style={S.visualFooter}>
             <span style={S.visualFooterLabel}>
               {activeShowcaseItem.label}
