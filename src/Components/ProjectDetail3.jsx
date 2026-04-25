@@ -3,20 +3,41 @@ import { useParams } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay, EffectFade } from "swiper/modules";
+import { Pagination, Autoplay, EffectFade, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
-import video from "../assets/GreenMeadows.mov";
+import video from "../assets/walkthrough/IS Paradise.mp4";
 import AutoReveal from "./AutoReveal";
 import InstagramSection from "./InstagramSection";
-import intro from '../assets/projects/intro.png'
-import plan from '../assets/projects/plan.png'
-import gallery from '../assets/projects/gallery.png'
-import location from '../assets/projects/location.png'
-import construction from '../assets/projects/con.jpg'
-import about from '../assets/projects/about.png'
-import amenitiese from '../assets/projects/ame.png'
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+import intro from "../assets/projects/intro.png";
+import plan from "../assets/projects/plan.png";
+import gallery from "../assets/projects/gallery.png";
+import gallery2 from '../assets/gallery/IsParadise/1.png'
+import gallery3 from '../assets/gallery/IsParadise/2.png'
+import gallery4 from '../assets/gallery/IsParadise/3.png'
+
+import location from "../assets/projects/location.png";
+import construction from "../assets/projects/con.jpg";
+import about from "../assets/projects/about.png";
+import amenitiese from "../assets/projects/ame.png";
+import ame2 from '../assets/gallery/IsParadise/amenities/1.png'
+import ame3 from "../assets/gallery/IsParadise/amenities/2.png"
+
+import const2 from '../assets/gallery/IsParadise/construction /1.png'
+import const3 from '../assets/gallery/IsParadise/construction /2.png'
+import const4 from '../assets/gallery/IsParadise/construction /3.png'
+
+import plan2 from '../assets/gallery/IsParadise/plan/1.png'
+import plan3 from '../assets/gallery/IsParadise/plan/2.png'
+import plan4 from '../assets/gallery/IsParadise/plan/3.png'
+import plan5 from '../assets/gallery/IsParadise/plan/4.png'
+import plan6 from '../assets/gallery/IsParadise/plan/5.png'
+import plan7 from '../assets/gallery/IsParadise/plan/6.png'
+import plan8 from '../assets/gallery/IsParadise/plan/7.png'
+
 const BASE_URL = "/proxy-api";
 
 const getImageUrl = (path) => {
@@ -38,76 +59,73 @@ export default function ProjectDetail() {
     message: "",
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
-//==============================STATIC SHOWCASE START==============================
+  //==============================STATIC SHOWCASE START==============================
 
-const showcaseItems = [
-  // {
-  //   label: "About",
-  //   img: about,
-  // },
-  {
-    label: "Plans",
-    img: plan,
-  },
-  {
-    label: "Amenities",
-    img: amenitiese,
-  },
-  {
-    label: "Location",
-    img: location,
-  },
-  {
-    label: "Gallery",
-    img: gallery,
-  },
-  {
-    label: "Construction",
-    img: construction,
-  },
-];
+  const showcaseItems = [
+    // Turn any item into a slider by providing an array of image URLs / imports.
+    {
+      label: "Plans",
+      img: [plan, plan2, plan3, plan4, plan5, plan6, plan7, plan8],
+    },
+    {
+      label: "Amenities",
+      img: [amenitiese, ame2, ame3],
+    },
+    {
+      label: "Location",
+      img: location,
+    },
+    {
+      label: "Gallery",
+      img: [gallery, gallery2, gallery3, gallery4],
+    },
+    {
+      label: "Construction",
+      img: [construction, const2, const3, const4],
+    },
+  ];
 
-const [activeShowcase, setActiveShowcase] = useState("About");
+  const [activeShowcase, setActiveShowcase] = useState(showcaseItems[0].label);
 
-const activeShowcaseItem =
-  showcaseItems.find((item) => item.label === activeShowcase) ||
-  showcaseItems[0];
+  const activeShowcaseItem =
+    showcaseItems.find((item) => item.label === activeShowcase) ||
+    showcaseItems[0];
 
-const activeShowcaseIndex = showcaseItems.findIndex(
-  (item) => item.label === activeShowcase
-);
+  const activeShowcaseIndex = showcaseItems.findIndex(
+    (item) => item.label === activeShowcase,
+  );
 
-// ---- NEW: map link + embed URL for Location tab (improved) ----
-const MAP_SHORT_LINK = "https://maps.app.goo.gl/qvp2BhAjUssJgx3v5";
-// Full embed src copied from Google Maps → Share → Embed a map:
-const MAP_EMBED_SRC =
-  "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3558.0416859980805!2d75.7742245!3d26.9021721!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db46efb1eaf25%3A0x70a50618b4db7a87!2sUnique%20IS%20Paradise!5e0!3m2!1sen!2sin!4v1777007476147!5m2!1sen!2sin";
+  // ---- NEW: map link + embed URL for Location tab (improved) ----
+  const MAP_SHORT_LINK = "https://maps.app.goo.gl/qvp2BhAjUssJgx3v5";
+  // Full embed src copied from Google Maps → Share → Embed a map:
+  const MAP_EMBED_SRC =
+    "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3558.0416859980805!2d75.7742245!3d26.9021721!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db46efb1eaf25%3A0x70a50618b4db7a87!2sUnique%20IS%20Paradise!5e0!3m2!1sen!2sin!4v1777007476147!5m2!1sen!2sin";
 
-const mapEmbedUrl = useMemo(() => {
-  if (activeShowcase !== "Location") return null;
-  // Use exact embed src if provided (keeps marker/center/zoom)
-  if (MAP_EMBED_SRC) return MAP_EMBED_SRC;
-  const link =
-    project?.googleMapsLink ||
-    project?.locationLink ||
-    project?.locationMapUrl ||
-    project?.mapUrl ||
-    MAP_SHORT_LINK ||
-    project?.location ||
-    project?.address ||
-    null;
-  if (!link) return null;
-  // If link is a "lat,lng" pair (e.g. "26.9145,75.7878") embed using coords.
-  const latLngMatch = String(link).match(/(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)/);
-  if (latLngMatch) {
-    const q = encodeURIComponent(`${latLngMatch[1]},${latLngMatch[2]}`);
+  const mapEmbedUrl = useMemo(() => {
+    if (activeShowcase !== "Location") return null;
+    // Use exact embed src if provided (keeps marker/center/zoom)
+    if (MAP_EMBED_SRC) return MAP_EMBED_SRC;
+    const link =
+      project?.googleMapsLink ||
+      project?.locationLink ||
+      project?.locationMapUrl ||
+      project?.mapUrl ||
+      MAP_SHORT_LINK ||
+      project?.location ||
+      project?.address ||
+      null;
+    if (!link) return null;
+    // If link is a "lat,lng" pair (e.g. "26.9145,75.7878") embed using coords.
+    const latLngMatch = String(link).match(/(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)/);
+    if (latLngMatch) {
+      const q = encodeURIComponent(`${latLngMatch[1]},${latLngMatch[2]}`);
+      return `https://www.google.com/maps?q=${q}&z=17&output=embed`;
+    }
+    // Fallback: use link as query
+    const q = encodeURIComponent(link);
     return `https://www.google.com/maps?q=${q}&z=17&output=embed`;
-  }
-  // Fallback: use link as query
-  const q = encodeURIComponent(link);
-  return `https://www.google.com/maps?q=${q}&z=17&output=embed`;
-}, [activeShowcase, project]);
-//==============================STATIC SHOWCASE END==============================
+  }, [activeShowcase, project]);
+  //==============================STATIC SHOWCASE END==============================
   useEffect(() => {
     fetch(`${BASE_URL}/api/projects/${slug}`)
       .then((res) => res.json())
@@ -367,27 +385,23 @@ const mapEmbedUrl = useMemo(() => {
           </div>
         </section>
 
-       {project.logoImage && (
-  <section className="relative z-20 px-6 md:px-10 lg:px-16 -mt-16">
-    <div className="max-w-7xl mx-auto">
-      <div className="flex justify-center">
-        
-        {/* SMALL BOX */}
-        <div className="relative inline-flex items-center justify-center bg-white/95 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.12)] px-6 md:px-8 py-3 md:py-4">
-          
-          {/* LOGO BIGGER */}
-          <img
-            src={getImageUrl(project.logoImage)}
-            alt={project.name || "Project Logo"}
-            className="h-[70px] md:h-[90px] lg:h-[110px] w-auto object-contain"
-          />
-        
-        </div>
-
-      </div>
-    </div>
-  </section>
-)}
+        {project.logoImage && (
+          <section className="relative z-20 px-6 md:px-10 lg:px-16 -mt-16">
+            <div className="max-w-7xl mx-auto">
+              <div className="flex justify-center">
+                {/* SMALL BOX */}
+                <div className="relative inline-flex items-center justify-center bg-white/95 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.12)] px-6 md:px-8 py-3 md:py-4">
+                  {/* LOGO BIGGER */}
+                  <img
+                    src={getImageUrl(project.logoImage)}
+                    alt={project.name || "Project Logo"}
+                    className="h-[70px] md:h-[90px] lg:h-[110px] w-auto object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* ================= QUICK FACT STRIP ================= */}
         <section className="relative z-10 mt-6 md:mt-8 px-6 md:px-10 lg:px-16">
@@ -411,74 +425,71 @@ const mapEmbedUrl = useMemo(() => {
 
         {/* ================= STICKY SECTION NAV ================= */}
         <section className="sticky top-[76px] z-30 backdrop-blur-md bg-[#f8f6f2]/85 border-y border-black/6 mt-12">
-  <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
-    
-    {/* CENTER ALIGN FIX */}
-    <div className="flex justify-center">
-      <div className="flex gap-6 md:gap-8 overflow-x-auto py-4 text-[12px] md:text-[12px] tracking-[0.22em] whitespace-nowrap">
-        
-        <button
-          onClick={() => scrollToSection("overview")}
-          className="text-[#1b1b1b] hover:text-black transition uppercase"
-        >
-          Overview
-        </button>
+          <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
+            {/* CENTER ALIGN FIX */}
+            <div className="flex justify-center">
+              <div className="flex gap-6 md:gap-8 overflow-x-auto py-4 text-[12px] md:text-[12px] tracking-[0.22em] whitespace-nowrap">
+                <button
+                  onClick={() => scrollToSection("overview")}
+                  className="text-[#1b1b1b] hover:text-black transition uppercase"
+                >
+                  Overview
+                </button>
 
-        {/* ✅ UPDATED */}
-        <button
-          onClick={() => scrollToSection("plans")}
-          className="text-[#1b1b1b] hover:text-black transition uppercase"
-        >
-          Plans
-        </button>
+                {/* ✅ UPDATED */}
+                <button
+                  onClick={() => scrollToSection("plans")}
+                  className="text-[#1b1b1b] hover:text-black transition uppercase"
+                >
+                  Plans
+                </button>
 
-        {/* ✅ NEW SECTION */}
-        <button
-          onClick={() => scrollToSection("construction")}
-          className="text-[#1b1b1b] hover:text-black transition uppercase"
-        >
-          Construction
-        </button>
+                {/* ✅ NEW SECTION */}
+                <button
+                  onClick={() => scrollToSection("construction")}
+                  className="text-[#1b1b1b] hover:text-black transition uppercase"
+                >
+                  Construction
+                </button>
 
-        <button
-          onClick={() => scrollToSection("amenities")}
-          className="text-[#1b1b1b] hover:text-black transition uppercase"
-        >
-          Amenities
-        </button>
+                <button
+                  onClick={() => scrollToSection("amenities")}
+                  className="text-[#1b1b1b] hover:text-black transition uppercase"
+                >
+                  Amenities
+                </button>
 
-        {/* <button
+                {/* <button
           onClick={() => scrollToSection("highlights")}
           className="text-[#1b1b1b] hover:text-black transition uppercase"
         >
           Highlights
         </button> */}
 
-        <button
-          onClick={() => scrollToSection("walkthrough")}
-          className="text-[#1b1b1b] hover:text-black transition uppercase"
-        >
-          Walkthrough
-        </button>
+                <button
+                  onClick={() => scrollToSection("walkthrough")}
+                  className="text-[#1b1b1b] hover:text-black transition uppercase"
+                >
+                  Walkthrough
+                </button>
 
-        <button
-          onClick={() => scrollToSection("faq")}
-          className="text-[#1b1b1b] hover:text-black transition uppercase"
-        >
-          FAQ
-        </button>
+                <button
+                  onClick={() => scrollToSection("faq")}
+                  className="text-[#1b1b1b] hover:text-black transition uppercase"
+                >
+                  FAQ
+                </button>
 
-        <button
-          onClick={() => scrollToSection("enquire")}
-          className="text-[#1b1b1b] hover:text-black transition uppercase"
-        >
-          Enquire
-        </button>
-
-      </div>
-    </div>
-  </div>
-</section>
+                <button
+                  onClick={() => scrollToSection("enquire")}
+                  className="text-[#1b1b1b] hover:text-black transition uppercase"
+                >
+                  Enquire
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
         {/* ================= OVERVIEW ================= */}
         <section id="overview" style={S.section}>
           <div className="pd-overview-grid">
@@ -508,87 +519,21 @@ const mapEmbedUrl = useMemo(() => {
             </div>
 
             <div style={S.overviewImgWrap}>
-              <img
-                src={intro}
-                alt="Project"
-                style={S.overviewImg}
-              />
+              <img src={intro} alt="Project" style={S.overviewImg} />
               {/* <div style={S.overviewImgTag}>Luxury Residences</div> */}
             </div>
           </div>
         </section>
 
-        {/* ================= SHOWCASE DYNAMIC ================= */}
-        {/* {mediaTabs.length > 0 && activeMediaItem && (
-          <section id="plans" style={S.showcase}>
-            <div style={S.showcaseShell}>
-              <div style={S.showcaseHeader}>
-               
-                <h2 style={S.heading}>
-                  Project Showcase
-                </h2>
-              </div>
-
-              <div className="pd-showcase-layout">
-                <div className="pd-showcase-menu">
-                 
-
-                  {mediaTabs.map((tab, i) => {
-                    const active = activeMedia === tab.label;
-                    return (
-                      <button
-                        key={tab.label}
-                        onClick={() => setActiveMedia(tab.label)}
-                        style={{
-                          ...S.menuItem,
-                          ...(active ? S.menuItemActive : {}),
-                        }}
-                        className={`pd-menu-item${
-                          active ? " pd-menu-item--active" : ""
-                        }`}
-                      >
-                        <span style={S.menuItemNum}>
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                        <span style={S.menuItemLabel}>{tab.label}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                <div style={S.visual}>
-                  <div style={S.visualFrame}>
-                    <img
-                      key={activeMediaItem.label}
-                      src={activeMediaItem.img}
-                      alt={activeMediaItem.label}
-                      style={S.visualImg}
-                      className="pd-visual-img"
-                    />
-                    <div style={S.visualFooter}>
-                      <span style={S.visualFooterLabel}>
-                        {activeMediaItem.label}
-                      </span>
-                      <span style={S.visualFooterCount}>
-                        {String(activeMediaIndex + 1).padStart(2, "0")} /{" "}
-                        {String(mediaTabs.length).padStart(2, "0")}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        )} */}
-
-        {/* ================= SHOWCASE STATIC ================= */}
-          <section id="plans" style={S.showcase}>
+       {/* ================= SHOWCASE STATIC ================= */}
+<section id="plans" style={S.showcase}>
   <div style={S.showcaseShell}>
     <div style={S.showcaseHeader}>
       <h2 style={S.heading}>Project Showcase</h2>
     </div>
 
     <div className="pd-showcase-layout">
+      {/* LEFT MENU */}
       <div className="pd-showcase-menu">
         {showcaseItems.map((item, i) => {
           const active = activeShowcase === item.label;
@@ -614,8 +559,10 @@ const mapEmbedUrl = useMemo(() => {
         })}
       </div>
 
-      <div style={S.visual}>
+      {/* RIGHT VISUAL */}
+      <div style={S.visual} className="pd-visual">
         <div style={S.visualFrame}>
+          {/* ===== LOCATION (MAP) ===== */}
           {activeShowcaseItem.label === "Location" ? (
             <div
               key="location-wrap"
@@ -636,7 +583,6 @@ const mapEmbedUrl = useMemo(() => {
                     height: "100%",
                     border: 0,
                     display: "block",
-                    objectFit: "cover",
                   }}
                   className="pd-visual-img"
                   loading="lazy"
@@ -652,45 +598,69 @@ const mapEmbedUrl = useMemo(() => {
                   <img
                     src={activeShowcaseItem.img}
                     alt="Open location in maps"
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
                   />
                 </a>
               )}
-
-              {/* Open in Maps button (bottom right) */}
-              <a
-                href={MAP_SHORT_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  position: "absolute",
-                  right: 14,
-                  bottom: 14,
-                  background: "rgba(0,0,0,0.7)",
-                  color: "#fff",
-                  padding: "10px 12px",
-                  fontSize: 12,
-                  textDecoration: "none",
-                  borderRadius: 6,
-                  zIndex: 5,
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                }}
-                className="pd-open-maps"
-              >
-                Open in Google Maps
-              </a>
             </div>
           ) : (
-            <img
-              key={activeShowcaseItem.label}
-              src={activeShowcaseItem.img}
-              alt={activeShowcaseItem.label}
-              style={S.visualImg}
-              className="pd-visual-img"
-            />
+            <>
+              {/* ===== SLIDER OR SINGLE IMAGE ===== */}
+              {Array.isArray(activeShowcaseItem.img) ? (
+                <>
+                  <Swiper
+                    modules={[Pagination, Autoplay, Navigation]}
+                    pagination={{ clickable: true }}
+                    navigation={{
+                      nextEl: ".pd-swiper-next",
+                      prevEl: ".pd-swiper-prev",
+                    }}
+                    autoplay={{
+                      delay: 3000,
+                      disableOnInteraction: false,
+                      pauseOnMouseEnter: true,
+                    }}
+                    loop
+                    className="h-full"
+                  >
+                    {activeShowcaseItem.img.map((img, i) => (
+                      <SwiperSlide key={i}>
+                        <img
+                          src={img}
+                          alt={`${activeShowcaseItem.label}-${i}`}
+                          style={S.visualImg}
+                          className="pd-visual-img"
+                        />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+
+                  {/* Elegant Arrows */}
+                  {/* Elegant Arrows */}
+<button className="pd-swiper-prev">
+  <ChevronLeft size={22} strokeWidth={1.5} />
+</button>
+
+<button className="pd-swiper-next">
+  <ChevronRight size={22} strokeWidth={1.5} />
+</button>
+                </>
+              ) : (
+                <img
+                  src={activeShowcaseItem.img}
+                  alt={activeShowcaseItem.label}
+                  style={S.visualImg}
+                  className="pd-visual-img"
+                />
+              )}
+            </>
           )}
+
+          {/* FOOTER */}
           <div style={S.visualFooter}>
             <span style={S.visualFooterLabel}>
               {activeShowcaseItem.label}
@@ -1823,5 +1793,68 @@ const css = `
   .pd-closing-left {
     padding: 48px 24px;
   }
+    
+}
+/* ===== PREMIUM GLASS ARROWS ===== */
+.pd-swiper-prev,
+.pd-swiper-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) scale(0.95);
+  z-index: 30;
+
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+
+  color: #ffffff;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  cursor: pointer;
+
+  transition: all 0.35s ease;
+
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Position */
+.pd-swiper-prev {
+  left: 24px;
+}
+
+.pd-swiper-next {
+  right: 24px;
+}
+
+/* SHOW ON HOVER */
+.pd-visual:hover .pd-swiper-prev,
+.pd-visual:hover .pd-swiper-next {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Hover Interaction */
+.pd-swiper-prev:hover,
+.pd-swiper-next:hover {
+  background: #ffffff;
+  color: #111;
+  border-color: #fff;
+
+  transform: translateY(-50%) scale(1.08);
+}
+
+/* Subtle shadow */
+.pd-swiper-prev,
+.pd-swiper-next {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
 }
 `;
